@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Създай нов Code Snippet</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            {{ form.as_p }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Запази кода</button>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Отказ</a>
+    </form>
+</div>
+{% endblock %}

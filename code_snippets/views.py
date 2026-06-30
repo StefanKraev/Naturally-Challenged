@@ -41,6 +41,7 @@ def create_snippet(request):
             snippet = form.save(commit=False)
             snippet.developer = request.user
             snippet.save()
+            messages.success(request, 'Кодът беше успешно качен!')
             return redirect('home')
     else:
         form = CodeSnippetForm()
