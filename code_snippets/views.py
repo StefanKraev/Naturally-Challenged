@@ -27,3 +27,6 @@ def login(request):
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
+
+def about(request):
+    return render(request, 'about.html')
