@@ -10,10 +10,11 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="/">SnippetHub</a>
+            <a class="navbar-brand" href="{% url 'home' %}">SnippetHub</a>
             <div class="navbar-nav">
-                <a class="nav-link" href="/">Home</a>
+                <a class="nav-link" href="{% url 'home' %}">Home</a>
                 <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
             </div>
         </div>
     </nav>
