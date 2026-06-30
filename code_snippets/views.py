@@ -1,7 +1,9 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from .forms import CodeSnippetForm
 
 def home(request):
     return render(request, 'home.html')
@@ -30,3 +32,20 @@ def login_view(request):
 
 def about(request):
     return render(request, 'about.html')
+
+@login_required
+def create_snippet(request):
+    if request.method == 'POST':
+        form = CodeSnippetForm(request.POST)
+        if form.is_valid():
+            snippet = form.save(commit=False)
+            snippet.developer = request.user
+            snippet.save()
+            return redirect('home')
+    else:
+        form = CodeSnippetForm()
+    return render(request, 'create_snippet.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
