@@ -73,3 +73,17 @@ def delete_snippet(request, snippet_id):
         return render(request, 'confirm_delete.html', {'snippet': snippet})
     else:
         return redirect('my_snippets')
+    
+@login_required
+def edit_snippet(request, snippet_id):
+    snippet = get_object_or_404(CodeSnippet, id=snippet_id, developer=request.user)
+    
+    if request.method == 'POST':
+        form = CodeSnippetForm(request.POST, instance=snippet)
+        if form.is_valid():
+            form.save()
+            return redirect('my_snippets')
+    else:
+        form = CodeSnippetForm(instance=snippet)
+        
+    return render(request, 'edit_snippet.html', {'form': form, 'snippet': snippet})
