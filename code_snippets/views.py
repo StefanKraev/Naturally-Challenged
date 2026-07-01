@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CodeSnippetForm
+from .models import CodeSnippet
 
 def home(request):
     return render(request, 'home.html')
@@ -50,3 +51,7 @@ def create_snippet(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+def all_snippets(request):
+    snippets = CodeSnippet.objects.all().order_by('-id')
+    return render(request, 'all_snippets.html', {'snippets': snippets})
