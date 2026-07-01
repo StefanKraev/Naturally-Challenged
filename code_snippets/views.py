@@ -13,9 +13,9 @@ def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save() # Създава потребителя в базата данни
+            form.save()
             messages.success(request, 'Account created successfully!')
-            return redirect('home') # Пренасочва след регистрация
+            return redirect('home')
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
@@ -55,3 +55,8 @@ def logout_view(request):
 def all_snippets(request):
     snippets = CodeSnippet.objects.all().order_by('-id')
     return render(request, 'all_snippets.html', {'snippets': snippets})
+
+@login_required
+def my_snippets(request):
+    snippets = CodeSnippet.objects.filter(developer=request.user).order_by('-id')
+    return render(request, 'my_snippets.html', {'snippets': snippets})

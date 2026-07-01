@@ -10,4 +10,5 @@ urlpatterns = [
     path('create/', views.create_snippet, name='create_snippet'),
     path('logout/', views.logout_view, name='logout'),
     path('snippets/', views.all_snippets, name='all_snippets'),
+    path('my-snippets/', views.my_snippets, name='my_snippets'),
 ]
