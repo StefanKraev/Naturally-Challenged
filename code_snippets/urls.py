@@ -11,4 +11,5 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('snippets/', views.all_snippets, name='all_snippets'),
     path('my-snippets/', views.my_snippets, name='my_snippets'),
+    path('delete/<int:snippet_id>/', views.delete_snippet, name='delete_snippet'),
 ]

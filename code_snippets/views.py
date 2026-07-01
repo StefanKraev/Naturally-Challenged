@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CodeSnippetForm
 from .models import CodeSnippet
+from django.shortcuts import get_object_or_404
 
 def home(request):
     return render(request, 'home.html')
@@ -60,3 +61,15 @@ def all_snippets(request):
 def my_snippets(request):
     snippets = CodeSnippet.objects.filter(developer=request.user).order_by('-id')
     return render(request, 'my_snippets.html', {'snippets': snippets})
+
+@login_required
+def delete_snippet(request, snippet_id):
+    snippet = get_object_or_404(CodeSnippet, id=snippet_id)
+    
+    if snippet.developer == request.user:
+        if request.method == 'POST':
+            snippet.delete()
+            return redirect('my_snippets')
+        return render(request, 'confirm_delete.html', {'snippet': snippet})
+    else:
+        return redirect('my_snippets')
