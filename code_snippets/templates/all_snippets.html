@@ -4,6 +4,19 @@
 <div class="container mt-5">
     <h2>All Code Snippets</h2>
     <div class="row">
+        <div class="mb-4">
+            <h5>Filter by category:</h5>
+            <form method="GET" action="{% url 'all_snippets' %}">
+                <select name="category" class="form-select w-25" onchange="this.form.submit()">
+                    <option value="">-- Choose Category --</option>
+                    {% for cat in categories %}
+                        <option value="{{ cat.name }}" {% if selected_category == cat.name %}selected{% endif %}>
+                            {{ cat.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
         {% for snippet in snippets %}
         <div class="col-md-4 mb-4">
             <div class="card">

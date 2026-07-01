@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CodeSnippetForm
 from .models import CodeSnippet
+from .models import Category
 from django.shortcuts import get_object_or_404
 
 def home(request):
@@ -54,8 +55,20 @@ def logout_view(request):
     return redirect('home')
 
 def all_snippets(request):
-    snippets = CodeSnippet.objects.all().order_by('-id')
-    return render(request, 'all_snippets.html', {'snippets': snippets})
+    category_name = request.GET.get('category')
+    
+    if category_name:
+        snippets = CodeSnippet.objects.filter(category__name=category_name).order_by('-id')
+    else:
+        snippets = CodeSnippet.objects.all().order_by('-id')
+        
+    categories = Category.objects.all()
+    
+    return render(request, 'all_snippets.html', {
+        'snippets': snippets,
+        'categories': categories,
+        'selected_category': category_name
+    })
 
 @login_required
 def my_snippets(request):
