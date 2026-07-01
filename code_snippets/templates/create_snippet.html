@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% block title %}Create Snippet | Naturally Challenged{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <h2>Създай нов Code Snippet</h2>
+    <h2>Create new Code Snippet</h2>
     
     <form method="post">
         {% csrf_token %}
@@ -12,8 +13,8 @@
             {{ form|crispy }}
         </div>
         
-        <button type="submit" class="btn btn-primary">Запази кода</button>
-        <a href="{% url 'home' %}" class="btn btn-secondary">Отказ</a>
+        <button type="submit" class="btn btn-primary">Save code</button>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 {% endblock %}
