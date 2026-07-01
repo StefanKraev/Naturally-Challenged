@@ -46,7 +46,7 @@ def create_snippet(request):
             snippet.developer = request.user
             snippet.save()
             messages.success(request, 'Кодът беше успешно качен!')
-            return redirect('home')
+            return redirect('my_snippets')
     else:
         form = CodeSnippetForm()
     return render(request, 'create_snippet.html', {'form': form})

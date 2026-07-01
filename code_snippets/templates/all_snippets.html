@@ -22,12 +22,32 @@
         {% for snippet in snippets %}
         <div class="col-md-4 mb-4">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body text-center">
                     <h5 class="card-title">{{ snippet.title }}</h5>
-                    <p class="text-muted">Category: {{ snippet.category.name }}</p>
-                    <p>Author: {{ snippet.developer.username }}</p>
+                    <p class="text-muted mb-1">Category: {{ snippet.category.name }}</p>
+                    <p class="text-muted">Author: {{ snippet.developer.username }}</p>
                     <hr>
-                    <pre><code>{{ snippet.content|truncatechars:100 }}</code></pre>
+
+                    <div class="text-start">
+                        <pre><code>{{ snippet.content|truncatechars:100 }}</code></pre>
+                    </div>
+
+                    <button class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#snippetModal{{ snippet.id }}">
+                        View Code
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="snippetModal{{ snippet.id }}" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ snippet.title }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-start">
+                        <pre><code>{{ snippet.content }}</code></pre>
+                    </div>
                 </div>
             </div>
         </div>
