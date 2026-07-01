@@ -3,11 +3,46 @@
 {% block title %}Home | Naturally Challenged{% endblock %}
 
 {% block content %}
-<div class="p-5 mb-4 bg-light rounded-3">
-    <div class="container-fluid py-5">
-        <h1 class="display-5 fw-bold">Welcome to Naturally Challenged</h1>
-        <p class="col-md-8 fs-4">Store, organize, and share your code snippets efficiently with our Django-powered platform.</p>
-        <button class="btn btn-primary btn-lg" type="button">Get Started</button>
+<div class="p-5 mb-4 bg-white rounded-3 shadow-sm border">
+    <div class="container-fluid py-5 text-center">
+        <h1 class="display-4 fw-bold">Master Code, One Snippet at a Time</h1>
+        <p class="lead mb-4">
+            A developer-centric hub to store, analyze, and refine your code. 
+            Join our community and bridge the gap between AI generation and human craftsmanship.
+        </p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="{% url 'create_snippet' %}" class="btn btn-primary btn-lg px-4 me-sm-3">Start Sharing</a>
+            <a href="{% url 'all_snippets' %}" class="btn btn-outline-secondary btn-lg px-4">Browse Library</a>
+        </div>
     </div>
+</div>
+
+<div class="row align-items-md-stretch mt-5">
+    <div class="col-md-4 mb-4">
+        <div class="h-100 p-5 text-white bg-dark rounded-3 shadow">
+            <h2>Organize</h2>
+            <p>Keep your best solutions in one place. Use our structured categorization to never lose track of a complex function or a clever algorithm again.</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="h-100 p-5 bg-light border rounded-3 shadow-sm">
+            <h2>Analyze</h2>
+            <p>Don't just copy-paste. Study code from fellow engineers, understand the logic behind different implementations, and sharpen your analytical skills.</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="h-100 p-5 text-white bg-primary rounded-3 shadow">
+            <h2>Collaborate</h2>
+            <p>Share your experience with the community. Receive feedback, suggest improvements, and grow as a software engineer together with peers.</p>
+        </div>
+    </div>
+</div>
+
+<div class="mt-5 p-5 bg-light border-top text-center">
+    <h3>Ready to contribute to the repository?</h3>
+    <p class="mb-4">Become part of our growing developer community today.</p>
+    {% if not user.is_authenticated %}
+        <a href="{% url 'register' %}" class="btn btn-success btn-lg">Create an Account</a>
+    {% endif %}
 </div>
 {% endblock %}

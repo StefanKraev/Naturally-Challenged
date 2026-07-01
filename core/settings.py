@@ -124,3 +124,8 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # settings.py
 LOGIN_URL = 'login' # Името на твоя url за login
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
